@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +17,13 @@ import fr.latelier.cats.repository.CatRepository;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins="http://localhost:3000")
 public class CatController {
 	@Autowired
 	private CatRepository catRepository ;
 	//Voter pour le chat
-	@PostMapping("vote")
-	public void voteCat(@RequestBody String catId){
+	@PutMapping(path="vote/{catId}")
+	public void voteCat(@PathVariable String catId){
 		Optional<Cat> votedCat = catRepository.findById(catId);
 		System.out.println(catId);
 		if(votedCat.isPresent()) {

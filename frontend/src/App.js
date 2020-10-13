@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import Cats from './components/Cats'
+import './App.less';
+import Cats from './components/CatsList'
 
 function App() {
   return (
